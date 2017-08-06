@@ -1,0 +1,67 @@
+<aside class="Hui-aside">
+    <div class="menu_dropdown bk_2">
+        <dl id="menu-admin">
+            <dt class="selected"><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd style="display:block">
+                <ul>
+                    <li><a href="__MODULE__/Role/index" title="角色管理">角色管理</a></li>
+                    <li><a href="__MODULE__/Auth/index" title="权限管理">权限管理</a></li>
+                    <li class="current"> <a href="__MODULE__/User/index" title="管理员列表">管理员列表</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-blog">
+            <dt><i class="Hui-iconfont">&#xe613;</i> 博文管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="__MODULE__/Article/index" title="博文管理">博文列表</a></li>
+                </ul>
+            </dd>
+        </dl>
+         <dl id="menu-picture">
+            <dt><i class="Hui-iconfont">&#xe613;</i> 分类管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="<?php echo U('Category/index')?>" title="分类管理">分类列表</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-comments">
+            <dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="#" title="评论列表">评论列表</a></li>
+                    <li><a href="#" title="意见反馈">意见反馈</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-member">
+            <dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="member-list.html" title="会员列表">会员列表</a></li>
+                    <li><a href="member-del.html" title="删除的会员">删除的会员</a></li>
+                    <li><a href="member-level.html" title="等级管理">等级管理</a></li>
+                    <li><a href="member-scoreoperation.html" title="积分管理">积分管理</a></li>
+                    <li><a href="member-record-browse.html" title="浏览记录">浏览记录</a></li>
+                    <li><a href="member-record-download.html" title="下载记录">下载记录</a></li>
+                    <li><a href="member-record-share.html" title="分享记录">分享记录</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-system">
+            <dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="system-base.html" title="系统设置">系统设置</a></li>
+                    <li><a href="system-category.html" title="栏目管理">栏目管理</a></li>
+                    <li><a href="system-data.html" title="数据字典">数据字典</a></li>
+                    <li><a href="system-shielding.html" title="屏蔽词">屏蔽词</a></li>
+                    <li><a href="__MODULE__/index/index" title="系统日志">系统日志</a></li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</aside>
+<div class="dislpayArrow hidden-xs"> <a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a> </div>
+<!--/_menu 作为公共模版分离出去-->

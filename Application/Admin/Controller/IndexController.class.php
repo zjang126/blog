@@ -1,7 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2017/8/6 0006
- * Time: 下午 14:46
- */
+namespace Admin\Controller;
+
+use Think\Controller;
+
+class  IndexController extends Controller
+{
+    public function index()
+    {
+      $this->display();
+}
+}
