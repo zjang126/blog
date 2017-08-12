@@ -70,14 +70,14 @@
 					<td><?php echo $v['phone'];?></td>
 					<td><?php echo $v['email'];?></td>
 					<td><?php echo $v['role_name'];?></td>
-					<td><?php echo date('Y-m-d H:i:s',$v[add_time]) ?></td>
-					<td><?php echo date('Y-m-d H:i:s',$v[log_time]) ?></td>
-					<td><?php echo long2ip($v['login_ip'])?></td>
+					<td><?php echo date('Y-m-d H:i',$v[add_time]); ?></td>
+					<td><?php if($v[log_time]>0){echo date('Y-m-d H:i',$v[log_time]) ;}; ?></td>
+					<td><?php echo long2ip($v['login_ip']);?></td>
 					<td class="td-manage">
 						<?php if ( $v['id'] > 1): ?>
 						<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','__CONTROLLER__/upd/id/<?php echo $v[id]?>','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-						<a title="删除" href="__CONTROLLER__/del/id/<?php echo $v[id]?>"  style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-                      <?php endif?>
+						<a title="删除"  u_id="<?php echo $v[id];?>"  class="del"  style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                      <?php endif ?>
 				</tr>
 				</tbody>
 				<?php }?>
@@ -115,5 +115,38 @@
 
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
+<script>
+	//无刷新删除
+    $(".del").click(function(){
+        var self = $(this);
+        if(!confirm('确认删除？')){
+            return false;
+        }
+        //发送ajax请求
+        var u_id = $(this).attr('u_id');
+        $.ajax({
+            type:"get",
+            url:"__CONTROLLER__/del",
+            data:{"u_id":u_id},
+            dataType:'json',
+            success:function(json){
+
+                if(json.errCode == 0){
+                    //要删除当前行
+                    self.parents("tr").remove();
+                    //序号需要重新排列
+                    $("tbody tr").each(function(k,v){
+                        $(this).find("td:first").html(k+1);
+                    });
+                    alert(json.info);
+
+                }else{
+                    alert(json.info);
+                }
+
+            }
+        });
+    });
+</script>
 </body>
 </html>

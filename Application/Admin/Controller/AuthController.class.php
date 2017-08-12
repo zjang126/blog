@@ -32,11 +32,10 @@ class  AuthController extends CommonController
         $this->assign('authData', $authData);
         $this->display();
     }
-    public function del()
+    public function adel()
     {
         $authId = I('get.auth_id');
         $authModel = D("Auth");
-
         // 注意：之前说过，权限是存在层级，如果删除的某个权限存在子级权限，则不能删除
         // boolean true代表存在子级 false代表没有子级
         $status = $authModel->checkChild($authId);
@@ -44,11 +43,8 @@ class  AuthController extends CommonController
         if($status){
             $this->error('删除失败！ 当前权限存在子级，无法直接删除');
         }
-
         $authModel->delete($authId);
-
         $this->success('删除成功！',U('index'));exit();
-
     }
     public function upd(){
         $authModel = D("Auth");
@@ -77,5 +73,23 @@ class  AuthController extends CommonController
         $this->assign('ids', $ids);
 
         $this->display();
+    }
+    public function del(){
+        if(IS_AJAX){
+            $a_id = I('get.a_id');
+            $Model = D("Auth");
+            //判断当前分类下面有没有子分类
+            $flag1 = $Model->checkChild($a_id);
+            if($flag1){
+                $data = array(
+                    'errCode' =>1 ,
+                    'info'=>'当前权限下面有子分类，不能删除'
+                );
+                echo json_encode($data);die();
+            }
+            //删除文章分类
+            $Model->delete($a_id);
+            echo json_encode(array('errCode'=>0,'info'=>"删除成功"));die();
+        }
     }
 }

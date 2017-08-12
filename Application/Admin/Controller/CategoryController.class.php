@@ -108,10 +108,4 @@ class CategoryController extends CommonController{
             echo json_encode(array('errCode'=>0,'info'=>"删除成功"));die();
         }
     }
-
-
-
-
-
-
 }

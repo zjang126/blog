@@ -11,7 +11,6 @@
 	<script type="text/javascript" src="ADMIN_PUBLIC/lib/respond.min.js"></script>
 	<![endif]-->
 	<link href="ADMIN_PUBLIC/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-	<link href="ADMIN_PUBLIC/static/h-ui/css/H-ui.login.css" rel="stylesheet" type="text/css" />
 	<link href="ADMIN_PUBLIC/static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
 	<link href="ADMIN_PUBLIC/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
 	<!--[if IE 6]>
@@ -22,7 +21,7 @@
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
 <div class="header"></div>
-<div class="loginWraper">
+<div class="loginWraper" style="padding-top: 280px;">
 	<div id="loginform" class="loginBox">
 		<form class="form form-horizontal" action="__ACTION__" method="post">
 			<div class="row cl">
@@ -58,27 +57,20 @@
 
 <script type="text/javascript" src="ADMIN_PUBLIC/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="ADMIN_PUBLIC/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript">
+    setInterval("$(document).change()",3000);//定时 3秒显示背景图
+    $(document).change(function(){
+        var random_bg=parseInt(Math.random()*53+1);//随机背景图
+        var bg='url(ADMIN_PUBLIC/images/'+random_bg+'.jpg)';
+        $("body").css("background-image",bg);
+        $("body").css("background-size","cover");
+    });
+</script>
 <script>
     $('#change').click(function(){
         $(this).attr('src','__CONTROLLER__/genCode/'+Math.random());
-    })
+    });
     $('#change').click();
-</script>
-<script type="text/javascript"> 
-   setInterval('change()',1000); /*先设定函数运行的更新时间*/
-var bodyObj = document.body;/*获取标签中的对象*/
- function change(){/*因为要使背景颜色随机改变，所以将颜色rgbde的三个数值设为变量。*/
-       var min =0;
-	   var max =255;/*颜色数值由0~255，因此又要使用到函数*/
-	   var red =getRandom(max,min);
-	   var green =getRandom(max,min);
-	   var blue =getRandom(max,min);
-	   bodyObj.style.backgroundColor ='rgb('+red+','+green+','+blue+')';  /*将标签中的对象设置CSS*/
- }
-    function getRandom(a,b){/*设置随机变量最大、最小值*/
-	return Math.floor(Math.random()*(a-b+1)+b);/*这个代码可以Math.floor(Math.random()*(最大值-最小值+1)+最小值)  包含最小值包含最大值   包含指定区域的随机数，包含最大值与最小值*/
-    /*注意书写格式 ：Math.floor(Math.random()*(Max-min+1)+min);*/
-	}
 </script>
 </body>
 </html>

@@ -75,12 +75,14 @@ class  RoleController extends CommonController
         $this->assign('authData',$authData);
         $this->display();
     }
-    public function del()
-    {
-        $roleId = I('get.role_id');
-        $roleModel = D("Role");
-        $roleModel->delete($roleId);
-        $this->success('删除成功！', U('index'));exit();
+    public function del(){
+        if(IS_AJAX){
+            $r_id = I('get.r_id');
+            $Model = D("Role");
+            //删除文章分类
+            $Model->delete($r_id);
+            echo json_encode(array('errCode'=>0,'info'=>"删除成功"));die();
+        }
     }
 
 }

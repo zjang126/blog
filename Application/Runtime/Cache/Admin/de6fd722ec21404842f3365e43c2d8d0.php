@@ -68,6 +68,12 @@
 <script type="text/javascript" src="/Public/Admin/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="/Public/Admin/static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="/Public/Admin/static/h-ui.admin/js/H-ui.admin.page.js"></script>
+<!--<script type="text/javascript">-->
+    <!--$(".Hui-aside").Huifold({-->
+        <!--titCell:'.menu_dropdown dl dt',-->
+        <!--mainCell:'.menu_dropdown dl dd',-->
+    <!--});-->
+<!--</script>-->
 <!--/_footer /作为公共模版分离出去-->
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="/Public/Admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>

@@ -117,8 +117,7 @@ $(function(){
 
 			},
 			phone:{
-				required:true,
-				isPhone:true
+				required:true
 			},
 			email:{
 				required:true,

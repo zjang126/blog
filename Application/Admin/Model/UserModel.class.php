@@ -14,10 +14,10 @@ class  UserModel extends Model
         array('username','','帐号名称已经存在！',1,'unique',2),
         array('email','email','邮箱重复',1,'unique',1),
         array('email','email','邮箱重复',1,'unique',2),
+        array('phone','/^1[3|4|5|7|8]\d{9}$/','手机格式不正确',0),
         array('phone','','手机号已经存在！',1,'unique',1),
-
-
-    );
+        array('phone','','手机号已经存在！',1,'unique',2),
+        );
     protected  $_auto=array(
         array('add_time','time',1,'function'),
     );
@@ -27,7 +27,6 @@ class  UserModel extends Model
 //利用钩子对密码进行加密   规则：md5( md5('用户提交的密码') + 盐(随机字符串 uniqid()) );
     public  function  _before_insert(&$data, $options)
     {
-
         $salt=uniqid();
         $data['salt']=$salt;
         $data['password']=md5(md5($data['password']).$salt);
@@ -53,8 +52,6 @@ class  UserModel extends Model
     }
     public function login()
     {
-        // 规定 $username = I('post.username');
-        // 为什么可以？ 面向对象 ---> 父类--> model.class.php --> 魔术方法__get()
         $username = $this->username;
         $password = $this->password;
 

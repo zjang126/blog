@@ -28,7 +28,7 @@
                 <ul class="cl">
                     <li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
-                            <li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
+                            <li><a href="javascript:;" onclick="article_add('添加资讯','/Admin/Article/add')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
                             <li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
                             <li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
                             <li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
@@ -118,6 +118,14 @@
                 </ul>
             </dd>
         </dl>
+        <dl  id="Hui-iconfont" >
+            <dt><i class="Hui-iconfont">&#xe613;</i> 回收站管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="#" title="博文管理">博文复原</a></li>
+                </ul>
+            </dd>
+        </dl>
         <dl id="menu-system">
             <dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
@@ -132,7 +140,7 @@
         </dl>
     </div>
 </aside>
-<div class="dislpayArrow hidden-xs"> <a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a> </div>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a> </div>
 <!--/_menu 作为公共模版分离出去-->
 
 <section class="Hui-article-box">
@@ -189,6 +197,12 @@
 <script type="text/javascript" src="/Public/Admin/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="/Public/Admin/static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="/Public/Admin/static/h-ui.admin/js/H-ui.admin.page.js"></script>
+<!--<script type="text/javascript">-->
+    <!--$(".Hui-aside").Huifold({-->
+        <!--titCell:'.menu_dropdown dl dt',-->
+        <!--mainCell:'.menu_dropdown dl dd',-->
+    <!--});-->
+<!--</script>-->
 <!--/_footer /作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->

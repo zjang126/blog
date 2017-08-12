@@ -30,7 +30,7 @@
                 <ul class="cl">
                     <li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
-                            <li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
+                            <li><a href="javascript:;" onclick="article_add('添加资讯','/Admin/Article/add')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
                             <li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
                             <li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
                             <li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
@@ -134,7 +134,7 @@
         </dl>
     </div>
 </aside>
-<div class="dislpayArrow hidden-xs"> <a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a> </div>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a> </div>
 <!--/_menu 作为公共模版分离出去-->
 
 <section class="Hui-article-box">
@@ -178,14 +178,14 @@
 					<td><?php echo $v['phone'];?></td>
 					<td><?php echo $v['email'];?></td>
 					<td><?php echo $v['role_name'];?></td>
-					<td><?php echo date('Y-m-d H:i:s',$v[add_time]) ?></td>
-					<td><?php echo date('Y-m-d H:i:s',$v[log_time]) ?></td>
-					<td><?php echo long2ip($v['login_ip'])?></td>
+					<td><?php echo date('Y-m-d H:i',$v[add_time]); ?></td>
+					<td><?php if($v[log_time]>0){echo date('Y-m-d H:i',$v[log_time]) ;}; ?></td>
+					<td><?php echo long2ip($v['login_ip']);?></td>
 					<td class="td-manage">
 						<?php if ( $v['id'] > 1): ?>
 						<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','/Admin/User/upd/id/<?php echo $v[id]?>','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-						<a title="删除" href="/Admin/User/del/id/<?php echo $v[id]?>"  style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-                      <?php endif?>
+						<a title="删除"  u_id="<?php echo $v[id];?>"  class="del"  style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                      <?php endif ?>
 				</tr>
 				</tbody>
 				<?php }?>
@@ -200,6 +200,12 @@
 <script type="text/javascript" src="/Public/Admin/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="/Public/Admin/static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="/Public/Admin/static/h-ui.admin/js/H-ui.admin.page.js"></script>
+<!--<script type="text/javascript">-->
+    <!--$(".Hui-aside").Huifold({-->
+        <!--titCell:'.menu_dropdown dl dt',-->
+        <!--mainCell:'.menu_dropdown dl dd',-->
+    <!--});-->
+<!--</script>-->
 <!--/_footer /作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
@@ -227,5 +233,38 @@
 
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
+<script>
+	//无刷新删除
+    $(".del").click(function(){
+        var self = $(this);
+        if(!confirm('确认删除？')){
+            return false;
+        }
+        //发送ajax请求
+        var u_id = $(this).attr('u_id');
+        $.ajax({
+            type:"get",
+            url:"/Admin/User/del",
+            data:{"u_id":u_id},
+            dataType:'json',
+            success:function(json){
+
+                if(json.errCode == 0){
+                    //要删除当前行
+                    self.parents("tr").remove();
+                    //序号需要重新排列
+                    $("tbody tr").each(function(k,v){
+                        $(this).find("td:first").html(k+1);
+                    });
+                    alert(json.info);
+
+                }else{
+                    alert(json.info);
+                }
+
+            }
+        });
+    });
+</script>
 </body>
 </html>

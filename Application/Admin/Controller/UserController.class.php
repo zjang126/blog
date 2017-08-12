@@ -14,7 +14,6 @@ class UserController extends CommonController {
         }
         // 数据获取
         $userModel = D('User');
-        // mysql> select a.*,b.role_name from sh_user a left join sh_role b on a.role_id = b.role_id\G
         $lists = $userModel
             ->alias('a')
             ->field('a.*,b.role_name')
@@ -53,17 +52,6 @@ class UserController extends CommonController {
         $this->assign('roleData',$roleData);
         $this->display();
     }
-    public function  del(){
-        $UserModel = D("User");
-        //主键为1的用户不能删除
-        $u_id=I('get.id');
-        if($u_id>1){
-            $UserModel->delete($u_id);
-            $this->success('删除成功',U('index'));exit;
-        }else{
-            $this->error('超级管理员不能删除');
-        }
-    }
     public function upd(){
         $UserModel = D("User");
         //用戶修改數據
@@ -88,5 +76,22 @@ class UserController extends CommonController {
         $this->assign('roleData',$roleData);
         $this->assign('data',$data);
         $this->display();
+    }
+    public function del(){
+        if(IS_AJAX){
+            $u_id = I('get.u_id');
+            $Model = D("User");
+            //判断当前分类下面有没有子分类
+            if($u_id==1){
+                $data = array(
+                    'errCode' =>1 ,
+                    'info'=>'超级管理员不能删除'
+                );
+                echo json_encode($data);die();
+            }
+            //删除文章分类
+            $Model->delete($u_id);
+            echo json_encode(array('errCode'=>0,'info'=>"删除成功"));die();
+        }
     }
 }

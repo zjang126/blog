@@ -37,7 +37,7 @@
                 <ul class="cl">
                     <li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
-                            <li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
+                            <li><a href="javascript:;" onclick="article_add('添加资讯','/Admin/Article/add')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
                             <li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
                             <li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
                             <li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
@@ -76,22 +76,6 @@
 <!--/_header 作为公共模版分离出去-->
 
 <!--_menu 作为公共模版分离出去-->
-<script language=javascript>
-    function expand(el)
-    {
-        childobj = document.getElementById("child" + el);
-
-        if (childobj.style.display == 'none')
-        {
-            childobj.style.display = 'block';
-        }
-        else
-        {
-            childobj.style.display = 'none';
-        }
-        return;
-    }
-</script>
 <aside class="Hui-aside">
     <div class="menu_dropdown bk_2">
         <dl id="menu-admin">
@@ -157,19 +141,13 @@
         </dl>
     </div>
 </aside>
-<div class="dislpayArrow hidden-xs"> <a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a> </div>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a> </div>
 <!--/_menu 作为公共模版分离出去-->
 
 <section class="Hui-article-box">
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 权限管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-			<div class="text-c">
-				<form class="Huiform" method="post" action="" target="_self">
-					<input type="text" class="input-text" style="width:250px" placeholder="权限名称"  name="">
-					<button type="submit" class="btn btn-success"  name=""><i class="Hui-iconfont">&#xe665;</i> 搜权限节点</button>
-				</form>
-			</div>
 			<div class="cl pd-5 bg-1 bk-gray mt-20"><a href="javascript:;" onclick="admin_add('添加权限节点','/Admin/Auth/add','','310')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加权限节点</a></span> <span class="r">共有数据：<strong><?php echo $ccc;?></strong> 条</span> </div>
 			<table class="table table-border table-bordered table-bg">
 				<thead>
@@ -192,7 +170,7 @@
 					<td><?php echo $v['auth_c'];?></td>
 					<td><?php echo $v['auth_a'];?></td>
 					<td><a title="编辑" href="javascript:;" onclick="admin_edit('权限编辑','/Admin/Auth/upd/auth_id/<?php echo $v[auth_id];?>','800','','310')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-						<a title="删除" id="del" href="/Admin/Auth/del/auth_id/<?php echo $v[auth_id];?>" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+						<a title="删除"  a_id="<?php echo $v['auth_id'];?>"  class="del"  style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 				</tr>
 				<?php endforeach?>
 				</tbody>
@@ -206,6 +184,12 @@
 <script type="text/javascript" src="/Public/Admin/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="/Public/Admin/static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="/Public/Admin/static/h-ui.admin/js/H-ui.admin.page.js"></script>
+<!--<script type="text/javascript">-->
+    <!--$(".Hui-aside").Huifold({-->
+        <!--titCell:'.menu_dropdown dl dt',-->
+        <!--mainCell:'.menu_dropdown dl dd',-->
+    <!--});-->
+<!--</script>-->
 <!--/_footer /作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
@@ -232,5 +216,35 @@
 
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
+<script>
+    //无刷新删除
+    $(".del").click(function(){
+        var self = $(this);
+        if(!confirm('确认删除？')){
+            return false;
+        }
+        //发送ajax请求
+        var a_id = $(this).attr('a_id');
+        $.ajax({
+            type:"get",
+            url:"/Admin/Auth/del",
+            data:{"a_id":a_id},
+            dataType:'json',
+            success:function(json){
+                if(json.errCode == 0){
+                    //要删除当前行
+                    self.parents("tr").remove();
+                    //序号需要重新排列
+                    $("tbody tr").each(function(k,v){
+                        $(this).find("td:first").html(k+1);
+                    });
+                    alert(json.info);
+                }else{
+                    alert(json.info);
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>
