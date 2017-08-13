@@ -17,7 +17,7 @@ return array(
     // 0 (普通模式); 1 (PATHINFO 模式); 2 (REWRITE  模式); 3 (兼容模式)  默认为PATHINFO 模式
     'TMPL_PARSE_STRING'  =>array(
         'ADMIN_PUBLIC' => '/Public/Admin',
-        "VIEW_UPLOAD" => "/Public/Uploads",
+        "VIEW_UPLOAD" => "/Public/Uploads",//上传图片地址
     ) ,
     'TMPL_L_DELIM' => '{{', // 模板引擎普通标签开始标记
     'TMPL_R_DELIM' => '}}', // 模板引擎普通标签结束标记

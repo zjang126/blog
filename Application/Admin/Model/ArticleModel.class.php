@@ -65,30 +65,21 @@ class ArticleModel extends Model{
         }
     }
 //图片不上传默认不作处理
-    protected function _before_update(&$data,$options) {
-        if($data['img_url']){
-            //开始上传文件
-            $uploadinfo = $this->fileUpload();
-            if($uploadinfo == false){
-                return false; // 返回 false 不会入库 必须加return
-            }else{
-                //写入路径到$data中去，方便入库操作
-                $data['img_url'] = $uploadinfo['img']['savepath'].$uploadinfo['img']['savename'];
-
-                $thumb_url = $uploadinfo['img']['savepath']."thumb_".$uploadinfo['img']['savename'];
-                //进行缩略图处理
-                $image = new \Think\Image();
-                //打开一个图片的路径
-                $image->open(C("UPLOAD_PATH").$data['img_url']);
-                // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.jpg
-                $image->thumb(150, 150,1)->save(C("UPLOAD_PATH").$thumb_url); // ./相对于入口文件index.php
-                //把缩略图的路径写入数据库
-                $data['thumb_url'] = $thumb_url;
+    protected function _before_update(&$data,$options)
+    {
+        // 获取旧的图片的路径[如果有新图片上传则进行删除]
+        if($_FILES['goods_img']['error'] == 0) {
+            // 根本没有图片上传
+            // 上传没有问题
+            $Id = $data['article_id'];
+            $info = $this->field('img_url,thumb_url')->find($Id); // ['1.jpg', 'thumb_1.jpg']
+            foreach ($info as $k => $v) {
+                // 删除图片
+                $path = C("UPLOAD_ROOT_PATH") . $v;
+                @unlink($path);
             }
-
-        }else{
-            unset($data['img']);
+            // 获取新的上传图片的路径
+            return $this->fileUpload();
         }
-
     }
 }

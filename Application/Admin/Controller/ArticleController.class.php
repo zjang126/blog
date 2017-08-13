@@ -8,15 +8,18 @@ class ArticleController extends CommonController {
         //不为空就组装查询条件
         if($keyword != ''){
             $where = array(
-                'title' => array('like',"%{$keyword}%")
+                'title' => array('like',"%{$keyword}%"),
+                'is_delete'=>0,
             );
+        }else{
+           $where=array('is_delete'=>0);
         }
         $articleModel =  D("Article");
         //分页实现
         //1.查询出满足条件的总记录数
         $count = $articleModel->where($where)->join("t1 left join category t2 on t1.cat_id = t2.cat_id")->count();
         //2、实例化分页类 传递总记录数和每页显示条数
-        $page = new \Think\Page($count,2);
+        $page = new \Think\Page($count,7);
         //修改分页的样式
         $page->setConfig("prev","上一页");
         $page->setConfig("next","下一页");
@@ -44,11 +47,8 @@ class ArticleController extends CommonController {
             );
             echo json_encode($content);die();
         }
-
         $this->display(); //这块是给get请求的 display底层是echo
-
     }
-
     public function add(){
         $articleModel = D("Article");
         if(IS_POST){
@@ -67,8 +67,6 @@ class ArticleController extends CommonController {
         $this->cats = getTree( D("Category")->select() );
         $this->display();
     }
-
-
     //ajax获取文章的详情
     public function ajaxGetContent(){
         if(IS_AJAX){
@@ -80,11 +78,8 @@ class ArticleController extends CommonController {
                 'content' => htmlspecialchars_decode($row['content'])
             );
             echo json_encode($data);die;
-
         }
     }
-
-
     //完成文章分类的文章数量统计
     public function charts(){
         //统计每个分类下面的文章的总数量
@@ -97,20 +92,20 @@ class ArticleController extends CommonController {
         $this->assign("data",json_encode($data) );
         $this->display();
     }
-    //ajax无刷新删除文章的方法
+    //ajax无刷新进回收站的方法
     public function del(){
         if(IS_AJAX){
             $article_id = I('get.article_id');
             $articleModel = D("Article");
             //删除文章分类
-            $flog=$articleModel->delete($article_id);
+            $flog=$articleModel->where(array('article_id'=>$article_id))->setField('is_delete',1);
+            //添加进回收站,做伪删除
             if($flog){
                 $data=array(
                     'errCode'=>0,
-                    'info'=>'删除成功',
-
+                    'info'=>'成功添加回收站',
                 );
-            echo json_encode($data);die();
+                echo json_encode($data);die();
             }
         }
     }
@@ -124,7 +119,7 @@ class ArticleController extends CommonController {
                     //成功后面需要输出
                     $this->success("修改数据成功");die();
                 }else{
-                    $this->error("修改失败".$articleModel->getDbError());
+                    $this->error("修改失败".$articleModel->getError());
                 }
             }else{
                 //没有验证通过，输出没有验证通过的提示信息

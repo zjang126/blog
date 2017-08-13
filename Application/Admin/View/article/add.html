@@ -18,37 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="ADMIN_PUBLIC/lib/Hui-iconfont/1.0.8/iconfont.css" />
 	<link rel="stylesheet" type="text/css" href="ADMIN_PUBLIC/static/h-ui.admin/skin/default/skin.css" id="skin" />
 	<link rel="stylesheet" type="text/css" href="ADMIN_PUBLIC/static/h-ui.admin/css/style.css" />
-	<script>
-        function(a, b) {
-            function c(a) {
-                return a[0] || (a = []),
-                    new KNode(a)
-            }
-            if (a !== undefined && null !== a) {
-                if ("string" == typeof a) {
-                    b && (b = _get(b));
-                    var d = a.length;
-                    if ("@" === a.charAt(0) && (a = a.substr(1)), a.length !== d || /<.+>/.test(a)) {
-                        var e = b ? b.ownerDocument || b: document,
-                            f = e.createElement("div"),
-                            g = [];
-                        f.innerHTML = '<img id="__kindeditor_temp_tag__" width="0" height="0" style="display:none;" />' + a;
-                        for (var h = 0,
-                                 i = f.childNodes.length; i > h; h++) {
-                            var j = f.childNodes[h];
-                            "__kindeditor_temp_tag__" != j.id && g.push(j)
-                        }
-                        return c(g)
-                    }
-                    return c(_queryAll(a, b))
-                }
-                return a && a.constructor === KNode ? a: (a.toArray && (a = a.toArray()), c(_isArray(a) ? a: _toArray(arguments)))
-            }
-        }
-	</script>
-
 	<!--/meta 作为公共模版分离出去-->
-
 	<title>添加分类 - 分类管理 - H-ui.admin v3.0</title>
 	<meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 	<meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
@@ -79,9 +49,9 @@
 			<label class="form-label col-xs-4 col-sm-3">图片：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span style="width:150px;">
              <input type="file" id="f"  name="img" onchange="change()"    >
-				 <p>
-            <img id="preview"  alt="" width="300px"  name="pic" />
-           </p>
+			 <div class="upload"> 上传图片</div>
+            <p><img id="preview"  width="300px" name="pic"/></p>
+
 			</span>
 			</div>
 		</div>
@@ -112,6 +82,7 @@
 <script type="text/javascript" src="ADMIN_PUBLIC/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 <script type="text/javascript" src="ADMIN_PUBLIC/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="ADMIN_PUBLIC/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="ADMIN_PUBLIC/div/placeImage.js">//上传图片预览功能</script>
 <script type="text/javascript">
     $(function(){
         $('.skin-minimal input').iCheck({

@@ -56,11 +56,10 @@
 	<div class="Hui-article">
 		<article class="cl pd-20">
 			<form action="__ACTION__" method="get">
-			<input type="text" class="input-text" style="width:250px" placeholder="输入博文名称"  name="keyword">
-			<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜博文</button>
+				<input type="text" class="input-text" style="width:250px" placeholder="输入博文名称"  name="keyword">
+				<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜博文</button>
 			</form>
 			<div class="cl pd-5 bg-1 bk-gray mt-20">
-				<a href="javascript:;" onclick="admin_add('添加博文','__CONTROLLER__/add','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加博文</a> </span>
 				<span class="r">共有数据：<strong><?php echo $count ;?></strong> 条</span>
 			</div>
 			<table class="table table-border table-bordered table-bg">
@@ -78,7 +77,28 @@
 
 				</tr>
 				</thead>
-				<include file="article/data"/>
+				<tbody>
+				<?php    $i=0; foreach($ArticleData as $k => $v):     ?>
+				<tr class="text-c">
+					<td style="color:black"><?php echo ++$i; ?></td>
+					<td><a href="#"><?php echo $v['title']; ?></a></td>
+					<td style="color:black"><?php echo $v['cat_name']; ?></td>
+					<td>
+						<?php if( $v['thumb_url'] == '' ){ ?>
+						<img src="ADMIN_PUBLIC/assets/img/default.jpg" width="50px" alt="">
+						<?php } else { ?>
+						<img class="pic" src="VIEW_UPLOAD/<?php echo $v['img_url']; ?>" width="100px" alt="">
+						<img class="picbig" src="VIEW_UPLOAD/<?php echo $v['img_url']; ?>"  alt="">
+						<?php } ?>
+					</td>
+					<td><a href="javascript:;" class="showContent" article_id="<?php echo $v['article_id']; ?>">查看文章详情</a></td>
+					<td class="td-manage">
+						<a title="复原" href="javascript:;" a_id="<?php echo $v['article_id']; ?>" class="reback" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+						<a title="删除"  article_id="<?php echo $v[article_id];?>"  class="del" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+				</tr>
+				<?php endforeach; ?>
+
+				</tbody>
 			</table>
 
 			<div >
@@ -172,19 +192,44 @@
             dataType:'json',
             success:function(json){
 
-                if(json.errCode == 0){
+                if(json.errCode == 0) {
                     //要删除当前行
                     self.parents("tr").remove();
                     //序号需要重新排列
-                    $("tbody tr").each(function(k,v){
-                        $(this).find("td:first").html(k+1);
+                    $("tbody tr").each(function (k, v) {
+                        $(this).find("td:first").html(k + 1);
                     });
                     alert(json.info);
+                }
+            }
+        });
+    });
+</script>
+<script>
+    //无刷新复原
+    $(".reback").click(function(){
+        var self = $(this);
+        if(!confirm('确认复原？')){
+            return false;
+        }
+        //发送ajax请求
+        var a_id = $(this).attr('a_id');
+        $.ajax({
+            type:"get",
+            url:"__CONTROLLER__/reback",
+            data:{"a_id":a_id},
+            dataType:'json',
+            success:function(json){
 
-                }else{
+                if(json.errCode == 0) {
+                    //要删除当前行
+                    self.parents("tr").remove();
+                    //序号需要重新排列
+                    $("tbody tr").each(function (k, v) {
+                        $(this).find("td:first").html(k + 1);
+                    });
                     alert(json.info);
                 }
-
             }
         });
     });

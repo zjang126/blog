@@ -14,12 +14,30 @@
 	<link rel="stylesheet" type="text/css" href="/Public/Admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
 	<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
 	<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui.admin/css/style.css" />
+	<style>
+		.pic{
+			width:50px;
+		}
+		.picbig{
+			position:absolute;
+			width:0px;
+			-webkit-transition:width 0.3s linear 0s;
+			-moz-transition:width 0.3s linear 0s;
+			-ms-transition:width 0.3s linear 0s;
+			transition:width 0.3s linear 0s;
+			z-index:10;
+		}
+		.pic:hover + .picbig{
+			width:270px;
+		}
+		div:hover{
+			color: #000000;
+		}
+	</style>
 
 	<!--/meta 作为公共模版分离出去-->
 
-	<title>管理员列表 - 管理员列表 - H-ui.admin v3.0</title>
-	<meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
-	<meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+	<title>博文列表 - 博文列表 - H-ui.admin v3.0</title>
 </head>
 <body>
 <!--_header 作为公共模版分离出去-->
@@ -148,58 +166,63 @@
 <section class="Hui-article-box">
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
 		<span class="c-gray en">&gt;</span>
-		管理员管理
+		博文管理
 		<span class="c-gray en">&gt;</span>
-		管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+		博文列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-			<form action="/Admin/User/index" METHOD="get">
-			<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称"  name="keyword">
-			<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+			<form action="/Admin/Recovery/index" method="get">
+				<input type="text" class="input-text" style="width:250px" placeholder="输入博文名称"  name="keyword">
+				<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜博文</button>
 			</form>
 			<div class="cl pd-5 bg-1 bk-gray mt-20">
-					<a href="javascript:;" onclick="admin_add('添加管理员','/Admin/User/add','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a> </span>
-				<span class="r">共有数据：<strong><?php echo $con ;?></strong> 条</span>
+				<span class="r">共有数据：<strong><?php echo $count ;?></strong> 条</span>
 			</div>
 			<table class="table table-border table-bordered table-bg">
 				<thead>
 				<tr>
-					<th scope="col" colspan="9">员工列表</th>
+					<th scope="col" colspan="9">博文列表</th>
 				</tr>
 				<tr class="text-c">
-					<th width="40">ID</th>
-					<th width="80">登录名</th>
-					<th width="80">手机</th>
-					<th width="130">邮箱</th>
-					<th width="90">角色</th>
-					<th width="110">加入时间</th>
-					<th width="100">最后登录时间</th>
-					<th width="90">上次登录的IP地址</th>
-					<th width="50">操作</th>
+					<th  width="100px" >序号</th>
+					<th  width="100px">文章标题</th>
+					<th  width="100px">所属分类</th>
+					<th  width="100px">图片</th>
+					<th  width="100px">文章详情</th>
+					<th width="163px" >操作</th>
+
 				</tr>
 				</thead>
 				<tbody>
-				<?php foreach($lists as $k=>$v){ ?>
+				<?php  $i=0; foreach($ArticleData as $k => $v): ?>
 				<tr class="text-c">
-					<td><?php echo $k+1;?></td>
-					<td><?php echo $v['username'];?></td>
-					<td><?php echo $v['phone'];?></td>
-					<td><?php echo $v['email'];?></td>
-					<td><?php echo $v['role_name'];?></td>
-					<td><?php echo date('Y-m-d H:i',$v[add_time]); ?></td>
-					<td><?php if($v[log_time]>0){echo date('Y-m-d H:i',$v[log_time]) ;}; ?></td>
-					<td><?php echo long2ip($v['login_ip']);?></td>
+					<td style="color:black"><?php echo ++$i; ?></td>
+					<td><a href="#"><?php echo $v['title']; ?></a></td>
+					<td style="color:black"><?php echo $v['cat_name']; ?></td>
+					<td>
+						<?php if( $v['thumb_url'] == '' ){ ?>
+						<img src="/Public/Admin/assets/img/default.jpg" width="50px" alt="">
+						<?php } else { ?>
+						<img class="pic" src="/Public/Uploads/<?php echo $v['img_url']; ?>" width="100px" alt="">
+						<img class="picbig" src="/Public/Uploads/<?php echo $v['img_url']; ?>"  alt="">
+						<?php } ?>
+					</td>
+					<td><a href="javascript:;" class="showContent" article_id="<?php echo $v['article_id']; ?>">查看文章详情</a></td>
 					<td class="td-manage">
-						<?php if ( $v['id'] > 1): ?>
-						<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','/Admin/User/upd/id/<?php echo $v[id]?>','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-						<a title="删除"  u_id="<?php echo $v[id];?>"  class="del"  style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-                      <?php endif ?>
+						<a title="复原" href="javascript:;" a_id="<?php echo $v['article_id']; ?>" class="reback" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+						<a title="删除"  article_id="<?php echo $v[article_id];?>"  class="del" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 				</tr>
+				<?php endforeach; ?>
+
 				</tbody>
-				<?php }?>
+			</table>
+
+			<div >
+				<!--  分页列码 -->
+				<?php echo ($pageList); ?>
+			</div>
 			</table>
 		</article>
-		<?php echo ($pageList); ?>
 	</div>
 </section>
 
@@ -229,47 +252,110 @@
 	 w		弹出层宽度（缺省调默认值）
 	 h		弹出层高度（缺省调默认值）
 	 */
-	/*管理员-增加*/
+	/*博文-增加*/
     function admin_add(title,url,w,h){
         layer_show(title,url,w,h);
     }
-	/*管理员-编辑*/
+	/*博文-编辑*/
     function admin_edit(title,url,w,h){
         layer_show(title,url,w,h);
     }
+</script>
+<script src="/Public/Admin/layer/layer.js"></script>
+<script>
+    //无刷新分页
+    //这里的单击事件需要用on去绑定，然后动态增加的页码也有单击的事件
+    $(document).on('click',".pagination a",function(){
+        var href = $(this).attr('href'); //获取到当前a链接的href属性的地址
+        //发送ajax请求
+        $.get(href,'',function(json){
+            //进行分页数据和分页页码的数据替换
+            $("tbody").html(json.data);
+            $(".pagination").html(json.page);
+            console.log(json);
+        },'json');
+        return false; //阻止a标签的默认行为
+    });
+
+
+    //查看文章详情
+    $(document).on("click",".showContent",function(){
+        var article_id = $(this).attr("article_id");
+        $.ajax({
+            type:"get",
+            url:"/Admin/Recovery/ajaxGetContent",
+            data:{"article_id":article_id},
+            dataType:'json',
+            success:function(json){
+
+                //页面层
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['620px', '440px'], //宽高
+                    content: "<div style='padding:30px'>"+json.content+"</div>"
+                });
+
+            }
+        });
+    });
 
 
 </script>
-<!--/请在上方写此页面业务相关的脚本-->
 <script>
-	//无刷新删除
+    //无刷新删除
     $(".del").click(function(){
         var self = $(this);
         if(!confirm('确认删除？')){
             return false;
         }
         //发送ajax请求
-        var u_id = $(this).attr('u_id');
+        var article_id = $(this).attr('article_id');
         $.ajax({
             type:"get",
-            url:"/Admin/User/del",
-            data:{"u_id":u_id},
+            url:"/Admin/Recovery/del",
+            data:{"article_id":article_id},
             dataType:'json',
             success:function(json){
 
-                if(json.errCode == 0){
+                if(json.errCode == 0) {
                     //要删除当前行
                     self.parents("tr").remove();
                     //序号需要重新排列
-                    $("tbody tr").each(function(k,v){
-                        $(this).find("td:first").html(k+1);
+                    $("tbody tr").each(function (k, v) {
+                        $(this).find("td:first").html(k + 1);
                     });
                     alert(json.info);
+                }
+            }
+        });
+    });
+</script>
+<script>
+    //无刷新复原
+    $(".reback").click(function(){
+        var self = $(this);
+        if(!confirm('确认复原？')){
+            return false;
+        }
+        //发送ajax请求
+        var a_id = $(this).attr('a_id');
+        $.ajax({
+            type:"get",
+            url:"/Admin/Recovery/reback",
+            data:{"a_id":a_id},
+            dataType:'json',
+            success:function(json){
 
-                }else{
+                if(json.errCode == 0) {
+                    //要删除当前行
+                    self.parents("tr").remove();
+                    //序号需要重新排列
+                    $("tbody tr").each(function (k, v) {
+                        $(this).find("td:first").html(k + 1);
+                    });
                     alert(json.info);
                 }
-
             }
         });
     });

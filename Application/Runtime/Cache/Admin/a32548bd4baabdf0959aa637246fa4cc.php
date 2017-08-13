@@ -35,7 +35,6 @@
 				<input type="text" class="input-text" value="<?php echo $data['title']; ?>" placeholder="" name="title">
 			</div>
 		</div>
-
 		<div  class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">分类：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span style="width:150px;">
@@ -50,7 +49,15 @@
 			</span>
 			</div>
 		</div>
+		<div  class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">图片：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span style="width:150px;">
+             <input type="file" id="f"  name="img" onchange="change()" value=""   >
+            <p><img id="preview"  width="300px" name="pic" src="/Public/Uploads/<?php echo C('/Public/Uploads').$data['thumb_url'];?>"/></p>
 
+			</span>
+			</div>
+		</div>
 		<div  class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">文章内容：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span style="width:150px;">
@@ -60,7 +67,7 @@
 		</div>
 		<div  class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+				<input  type="submit" class="btn btn-primary value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
 			</div>
 		</div>
 	</form>
@@ -72,12 +79,11 @@
 <script type="text/javascript" src="/Public/Admin/static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="/Public/Admin/static/h-ui.admin/js/H-ui.admin.page.js"></script>
 
-<!--/_footer /作为公共模版分离出去-->
-
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="/Public/Admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 <script type="text/javascript" src="/Public/Admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="/Public/Admin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="/Public/Admin/div/placeImage.js">//上传图片预览功能</script>
 <script type="text/javascript">
     $(function(){
         $('.skin-minimal input').iCheck({
