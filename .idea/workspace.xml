@@ -4,29 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/Application/Admin/View/user/upd.html" line="71" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c8677b7-497c-4cec-93af-6ef7f4c8f2b3" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Public/Admin/images/01.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Public/Admin/images/02.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Public/Admin/images/04.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Public/Admin/images/05.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Public/Admin/images/06.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Public/Admin/images/07.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Public/Admin/images/08.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Public/Admin/images/09.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Public/Uploads/2017-08-12/598f1abdb42b7.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Public/Uploads/2017-08-12/thumb_598f1abdb42b7.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Admin/Controller/ArticleController.class.php" afterPath="$PROJECT_DIR$/Application/Admin/Controller/ArticleController.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Admin/Controller/RecoveryController.class.php" afterPath="$PROJECT_DIR$/Application/Admin/Controller/RecoveryController.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Admin/Model/ArticleModel.class.php" afterPath="$PROJECT_DIR$/Application/Admin/Model/ArticleModel.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Admin/View/article/data.html" afterPath="$PROJECT_DIR$/Application/Admin/View/article/data.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Admin/View/article/index.html" afterPath="$PROJECT_DIR$/Application/Admin/View/article/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Admin/View/recovery/index.html" afterPath="$PROJECT_DIR$/Application/Admin/View/recovery/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Common/Conf/config.php" afterPath="$PROJECT_DIR$/Application/Common/Conf/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Runtime/Cache/Admin/7a4184ffe8f804b12b2e7f8851dd8f7d.php" afterPath="$PROJECT_DIR$/Application/Runtime/Cache/Admin/7a4184ffe8f804b12b2e7f8851dd8f7d.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Runtime/Cache/Admin/a32548bd4baabdf0959aa637246fa4cc.php" afterPath="$PROJECT_DIR$/Application/Runtime/Cache/Admin/a32548bd4baabdf0959aa637246fa4cc.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Runtime/Cache/Admin/aa5f168edc64a5963e70c593e4927d04.php" afterPath="$PROJECT_DIR$/Application/Runtime/Cache/Admin/aa5f168edc64a5963e70c593e4927d04.php" />
-    </list>
+    <list default="true" id="0c8677b7-497c-4cec-93af-6ef7f4c8f2b3" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -517,7 +495,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="188320000" />
+    <option name="totallyTimeSpent" value="188918000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
