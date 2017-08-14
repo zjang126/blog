@@ -17,6 +17,7 @@ return array(
     // 0 (普通模式); 1 (PATHINFO 模式); 2 (REWRITE  模式); 3 (兼容模式)  默认为PATHINFO 模式
     'TMPL_PARSE_STRING'  =>array(
         'ADMIN_PUBLIC' => '/Public/Admin',
+        'HOME_PUBLIC' => '/Public/Home',
         "VIEW_UPLOAD" => "/Public/Uploads",//上传图片地址
     ) ,
     'TMPL_L_DELIM' => '{{', // 模板引擎普通标签开始标记
@@ -26,6 +27,16 @@ return array(
     'SHOW_PAGE_TRACE'=>true,
     // 关闭字段缓存
     'DB_FIELDS_CACHE'=>false,
-    //入口文件到文件夹的地址
-    "UPLOAD_PATH" => "./Public/Uploads/",
+    // 上传处理
+    'UPLOAD_ROOT_PATH'     => './Public/Uploads/', // 注意： 1. 前面有点（相对于index.php TP单一入口的） 2. 后面有些斜线
+    'UPLOAD_FILE_SIZE'     => '3M', // 单位M
+    'UPLOAD_ALLOW_EXTS'    => array('jpg', 'gif', 'png', 'jpeg'), // 允许上传的后缀
+    // 缩略图配置
+    'THUMB_CONFIG'  => array(
+        'W' => 350,
+        'H' => 350,
+        'S' => 6 // 按照固定尺寸生成缩略图
+    ),
+    // 显示图片的根目录
+    'VIEW_ROOT_PATH'       => '/Public/Uploads/',
 );

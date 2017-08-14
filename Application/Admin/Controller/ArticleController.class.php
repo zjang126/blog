@@ -96,7 +96,7 @@ class ArticleController extends CommonController {
     public function del(){
         if(IS_AJAX){
             $article_id = I('get.article_id');
-            $articleModel = D("Article");
+            $articleModel = M("Article");
             //删除文章分类
             $flog=$articleModel->where(array('article_id'=>$article_id))->setField('is_delete',1);
             //添加进回收站,做伪删除
@@ -115,7 +115,7 @@ class ArticleController extends CommonController {
         //用戶修改數據
         if(IS_POST){
             if($articleModel->create()){
-                if($articleModel->save()){
+                if($articleModel->save()!==false){
                     //成功后面需要输出
                     $this->success("修改数据成功");die();
                 }else{

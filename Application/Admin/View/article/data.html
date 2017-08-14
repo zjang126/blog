@@ -12,6 +12,7 @@
 						<img class="picbig" src="VIEW_UPLOAD/<?php echo $v['img_url']; ?>"  alt="">
 						<?php } ?>
 					</td>
+					<td style="color:black"><?php echo date('Y-m-d H:i',$v['add_time']); ?></td>
 					<td><a href="javascript:;" class="showContent" article_id="<?php echo $v['article_id']; ?>">查看文章详情</a></td>
 					<td class="td-manage">
 						<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','__CONTROLLER__/upd/a_id/<?php echo $v['article_id']; ?>','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>

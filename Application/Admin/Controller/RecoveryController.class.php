@@ -57,7 +57,7 @@ class  RecoveryController extends Controller
     public function reback(){
         if(IS_AJAX){
             $a_id = I('get.a_id');
-            $articleModel = D("Article");
+            $articleModel = M("Article");
             //删除文章分类
             $flog=$articleModel->where(array('article_id'=>$a_id))->setField('is_delete',0);
             //添加进回收站,做伪删除

@@ -1,5 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?><!--_meta 作为公共模版分离出去-->
-<!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -18,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="/Public/Admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
 	<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
 	<link rel="stylesheet" type="text/css" href="/Public/Admin/static/h-ui.admin/css/style.css" />
-	<link rel="stylesheet" href="/Public/Admin/layui/src/css/layui.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Admin/layui/src/css/layui.css">
 	<!--/meta 作为公共模版分离出去-->
 
 	<title>添加分类 - 分类管理 - H-ui.admin v3.0</title>

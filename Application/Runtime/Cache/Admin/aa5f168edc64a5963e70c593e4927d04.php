@@ -188,8 +188,9 @@
 					<th  width="100px">文章标题</th>
 					<th  width="100px">所属分类</th>
 					<th  width="100px">图片</th>
-					<th  width="100px">文章详情</th>
-					<th width="163px" >操作</th>
+					<th  width="80px">文章详情</th>
+					<th  width="80px">加入时间</th>
+					<th width="100px" >操作</th>
 
 				</tr>
 				</thead>
@@ -207,6 +208,7 @@
 						<img class="picbig" src="/Public/Uploads/<?php echo $v['img_url']; ?>"  alt="">
 						<?php } ?>
 					</td>
+					<td style="color:black"><?php echo date('Y-m-d H:i',$v['add_time']); ?></td>
 					<td><a href="javascript:;" class="showContent" article_id="<?php echo $v['article_id']; ?>">查看文章详情</a></td>
 					<td class="td-manage">
 						<a title="复原" href="javascript:;" a_id="<?php echo $v['article_id']; ?>" class="reback" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
