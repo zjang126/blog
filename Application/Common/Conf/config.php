@@ -9,9 +9,9 @@ return array(
     'DB_PORT'               =>  '3306',        // 端口
     'DB_PREFIX'             =>  '',    // 数据库表前缀
 
-    'DEFAULT_MODULE'        =>  'Admin',  // 默认模块
-    'DEFAULT_CONTROLLER'    =>  'Login', // 默认控制器名称
-    'DEFAULT_ACTION'        =>  'login', // 默认操作名称
+    'DEFAULT_MODULE'        =>  'Home',  // 默认模块
+    'DEFAULT_CONTROLLER'    =>  'Index', // 默认控制器名称
+    'DEFAULT_ACTION'        =>  'index', // 默认操作名称
 
     'URL_MODEL'             =>  2,       // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
     // 0 (普通模式); 1 (PATHINFO 模式); 2 (REWRITE  模式); 3 (兼容模式)  默认为PATHINFO 模式

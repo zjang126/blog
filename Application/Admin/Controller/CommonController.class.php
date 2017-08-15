@@ -21,8 +21,6 @@ class  CommonController extends Controller
         //注意:如果获取当前用户的访问的操作(权限信息)
         $currentAction=CONTROLLER_NAME.'/'.ACTION_NAME; //USER/LST
         //代表用户所拥有的权限
-
-
         $allowAuth=session('auth');
 
         //代表不是超级管理员,当前访问操作是否 在用户的权限列表里面 //strtolower 规范大小写
